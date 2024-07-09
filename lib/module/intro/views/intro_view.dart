@@ -97,7 +97,7 @@ class _IntroViewState extends State<IntroView> {
                     onTap: () {
                       if (con.currentPage.value < 2) {
                         con.currentPage.value++;
-                        _pageController.animateToPage(con.currentPage.value, duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+                        _pageController.animateToPage(con.currentPage.value, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
                       } else {
                         Get.offAll(() => const LoginView());
                       }

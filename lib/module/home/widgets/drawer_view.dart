@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:divine_pooja/constants/constants.dart';
+import 'package:divine_pooja/core/common_widgets/media_source_picker.dart';
+import 'package:divine_pooja/core/utils/image_picker_utils.dart';
 import 'package:divine_pooja/module/cms/views/cms_view.dart';
 import 'package:divine_pooja/module/help_support/views/help_and_support_view.dart';
 import 'package:divine_pooja/module/home/widgets/delete_bottom_sheet.dart';
@@ -6,7 +10,8 @@ import 'package:divine_pooja/module/home/widgets/logout_bottom_sheet.dart';
 import 'package:divine_pooja/module/home/widgets/otp_bottom_sheet.dart';
 import 'package:divine_pooja/module/my_address/views/my_address_view.dart';
 import 'package:divine_pooja/module/my_order/views/my_order_view.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:divine_pooja/module/wishlist/views/wishlist_view.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DrawerView extends StatefulWidget {
   const DrawerView({super.key});
@@ -16,6 +21,8 @@ class DrawerView extends StatefulWidget {
 }
 
 class _DrawerViewState extends State<DrawerView> {
+  File image = File("");
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -57,15 +64,40 @@ class _DrawerViewState extends State<DrawerView> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 62.h,
-                      width: 62.w,
-                      padding: EdgeInsets.all(16.h),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFFF0CCAD),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.asset(userDefaultIc),
+                    Stack(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            onPickImage(context);
+                          },
+                          child: Container(
+                              height: 62.h,
+                              width: 62.w,
+                              padding: EdgeInsets.all(14.h),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFF0CCAD),
+                                shape: BoxShape.circle,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(30.dm),
+                                child: image.path != ""
+                                    ? Image.file(
+                                        File(image.path),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.asset(userDefaultIc),
+                              )),
+                        ),
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: Icon(
+                            Icons.camera,
+                            size: 20.h,
+                            color: mainColor,
+                          ),
+                        )
+                      ],
                     ),
                     SizedBox(width: 18.w),
                     Expanded(
@@ -97,7 +129,7 @@ class _DrawerViewState extends State<DrawerView> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Get.back();
                         OTPSheet().show(context);
                       },
@@ -118,6 +150,14 @@ class _DrawerViewState extends State<DrawerView> {
               },
               assetImg: myOrderIc,
               tittle: 'My Order',
+            ),
+            contColumn(
+              function: () {
+                Get.back();
+                Get.to(() => const WishListView());
+              },
+              assetImg: myOrderIc,
+              tittle: 'WishList',
             ),
             contColumn(
                 function: () {
@@ -185,11 +225,11 @@ class _DrawerViewState extends State<DrawerView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 16.h),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w),
-          child: GestureDetector(
-            onTap: function,
+        GestureDetector(
+          onTap: function,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 16.h),
+            width: MediaQuery.of(context).size.width,
             child: Row(
               children: [
                 Container(
@@ -220,9 +260,29 @@ class _DrawerViewState extends State<DrawerView> {
             ),
           ),
         ),
-        SizedBox(height: 16.h),
         Divider(height: 1.h, color: const Color(0xFFEAEAEA)),
       ],
     );
+  }
+
+  void onPickImage(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return const MediaSourcePicker();
+      },
+    ).then((value) async {
+      if (value != null && value is ImageSource) {
+        File? pickedFile = await PickImageUtility.instance(
+          applyEditor: true,
+          context: context,
+        ).pickedFile(value);
+        if (pickedFile != null) {
+          setState(() {
+            image = pickedFile;
+          });
+        }
+      }
+    });
   }
 }

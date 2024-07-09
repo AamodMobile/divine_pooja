@@ -99,7 +99,6 @@ class _OtpViewState extends State<OtpView> {
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.65,
-                height: 48,
                 child: PinCodeTextField(
                   cursorColor: mainColor,
                   keyboardType: TextInputType.number,

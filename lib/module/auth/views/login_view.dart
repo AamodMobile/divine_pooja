@@ -78,6 +78,8 @@ class _LoginViewState extends State<LoginView> {
                   borderCl: borderCl,
                   borderRadius: 4.dm,
                   hintText: "Enter Mobile Number",
+                  txKeyboardType: TextInputType.number,
+                  maxLength: 10,
                 ),
               ),
               SizedBox(height: 60.h),

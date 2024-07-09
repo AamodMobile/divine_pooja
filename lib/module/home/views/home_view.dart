@@ -112,85 +112,89 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             ],
           ),
           actions: [
-          GestureDetector(
-            onTap: () {
-              Get.to(() => const CheckOutView(), transition: Transition.rightToLeft, duration: const Duration(milliseconds: 500));
-            }, child: SizedBox(
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Image.asset(
-                    cartIc,
-                    height: 24.h,
-                    width: 24.w,
-                  ),
-                ),
-                Positioned(
-                  right: 0,
-                  top: -5,
-                  child: Container(
-                    padding: EdgeInsets.all(4.w),
-                    decoration: const BoxDecoration(
-                      color: mainColor,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      "0",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: regular,
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 8.sp,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),),
-            SizedBox(width: 5.w),
             GestureDetector(
               onTap: () {
                 Get.to(() => const CheckOutView(), transition: Transition.rightToLeft, duration: const Duration(milliseconds: 500));
-              }, child: SizedBox(
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Image.asset(
-                      bellIc,
-                      height: 24.h,
-                      width: 24.w,
-                    ),
-                  ),
-                  Positioned(
-                    right: 2,
-                    top: -6,
-                    child: Container(
-                      padding: EdgeInsets.all(4.w),
-                      decoration: const BoxDecoration(
-                        color: mainColor,
-                        shape: BoxShape.circle,
+              },
+              child: SizedBox(
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Image.asset(
+                        cartIc,
+                        height: 24.h,
+                        width: 24.w,
                       ),
-                      child: Text(
-                        "0",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: regular,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 8.sp,
+                    ),
+                    Positioned(
+                      right: 0,
+                      top: -5,
+                      child: Container(
+                        padding: EdgeInsets.all(4.w),
+                        decoration: const BoxDecoration(
+                          color: mainColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          "0",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: regular,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 8.sp,
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
-            ),),
+            ),
+            SizedBox(width: 5.w),
+            GestureDetector(
+              onTap: () {
+                Get.to(() => const NotificationView(), transition: Transition.rightToLeft, duration: const Duration(milliseconds: 500));
+              },
+              child: SizedBox(
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Image.asset(
+                        bellIc,
+                        height: 24.h,
+                        width: 24.w,
+                      ),
+                    ),
+                    Positioned(
+                      right: 2,
+                      top: -6,
+                      child: Container(
+                        padding: EdgeInsets.all(4.w),
+                        decoration: const BoxDecoration(
+                          color: mainColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          "0",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: regular,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 8.sp,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
             SizedBox(width: 10.w),
           ],
         ),
@@ -203,10 +207,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 child: Stack(
                   children: [
                     Container(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
+                      width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.symmetric(horizontal: 14.w),
                       child: Align(
                         alignment: Alignment.centerLeft,
@@ -228,39 +229,32 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                           ),
                           items: List.generate(
                             imageList.length,
-                                (ind) =>
-                                InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    height: 133,
-                                    width: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          offset: const Offset(0, 1),
-                                          blurRadius: 10,
-                                          spreadRadius: 0,
-                                          color: Colors.grey.withOpacity(0.05),
-                                        ),
-                                      ],
+                            (ind) => InkWell(
+                              onTap: () {},
+                              child: Container(
+                                height: 133,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: const Offset(0, 1),
+                                      blurRadius: 10,
+                                      spreadRadius: 0,
+                                      color: Colors.grey.withOpacity(0.05),
                                     ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(15),
-                                      child: Image.asset(
-                                        imageList[ind],
-                                        width: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.asset(
+                                    imageList[ind],
+                                    width: MediaQuery.of(context).size.width,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -273,17 +267,16 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                           imageList.length,
-                              (ind) =>
-                              Container(
-                                margin: const EdgeInsets.symmetric(horizontal: 2),
-                                padding: const EdgeInsets.all(5),
-                                height: 6,
-                                width: ind == selectedIndex ? 6 : 6,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: ind == selectedIndex ? mainColor : Colors.black.withOpacity(0.20),
-                                ),
-                              ),
+                          (ind) => Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 2),
+                            padding: const EdgeInsets.all(5),
+                            height: 6,
+                            width: ind == selectedIndex ? 6 : 6,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: ind == selectedIndex ? mainColor : Colors.black.withOpacity(0.20),
+                            ),
+                          ),
                         ),
                       ),
                     )
@@ -295,10 +288,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 position: _offsetAnimation,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
+                  width: MediaQuery.of(context).size.width,
                   decoration: const BoxDecoration(color: Color(0xFFF9E8D9)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -306,19 +296,16 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       Text(
                         "Shop our popular categories",
                         style: TextStyle(
-                          color: textDarkCl,
-                          fontFamily: regular,
+                          color: Colors.black,
+                          fontFamily: semiBold,
                           fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.normal,
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
                         ),
                       ),
                       SizedBox(height: 12.h),
                       SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
+                        width: MediaQuery.of(context).size.width,
                         height: 100.h,
                         child: ListView.builder(
                           itemCount: categoriesList.length,
@@ -331,7 +318,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        Get.to(() => const ItemListView(), transition: Transition.rightToLeft, duration: Duration(milliseconds: 500));
+                                        Get.to(() => const ItemListView(), transition: Transition.rightToLeft, duration: const Duration(milliseconds: 500));
                                       },
                                       child: Container(
                                         padding: EdgeInsets.all(14.h),
@@ -391,11 +378,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         "Homa /Haven",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: textDarkCl,
+                          color: Colors.black,
                           fontFamily: semiBold,
                           fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.normal,
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
                         ),
                       ),
                       GestureDetector(
@@ -404,12 +391,17 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         },
                         child: SizedBox(
                           height: 30.h,
-                          width: 30.w,
                           child: Center(
-                            child: Image.asset(
-                              arrowNextIc,
-                              height: 20.h,
-                              width: 20.w,
+                            child: Text(
+                              "View All",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: medium,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 12.sp,
+                              ),
                             ),
                           ),
                         ),
@@ -448,23 +440,40 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Image.asset(
-                                    demoHawanImg,
-                                    height: 100.h,
-                                  ),
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.dm),
+                                      child: Image.asset(
+                                        demoHawanImg,
+                                        height: 100.h,
+                                        width: MediaQuery.of(context).size.width,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: Container(
+                                        padding: EdgeInsets.all(5.dm),
+                                        child: Image.asset(
+                                          heartIc,
+                                          height: 20.h,
+                                          width: 20.w,
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 SizedBox(height: 4.h),
                                 Text(
                                   "Ganapathi Homam",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    color: textDarkCl,
+                                    color: Colors.black,
                                     fontFamily: semiBold,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 12.sp,
+                                    fontSize: 14.sp,
                                   ),
                                 ),
                                 SizedBox(height: 6.h),
@@ -498,7 +507,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                       fontFamily: semiBold,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
-                                      fontSize: 10.sp,
+                                      fontSize: 12.sp,
                                     ),
                                     children: [
                                       TextSpan(
@@ -508,7 +517,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                           fontFamily: semiBold,
                                           fontWeight: FontWeight.w400,
                                           fontStyle: FontStyle.normal,
-                                          fontSize: 10.sp,
+                                          fontSize: 12.sp,
                                           decoration: TextDecoration.lineThrough,
                                         ),
                                       ),
@@ -537,11 +546,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         "Events",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: textDarkCl,
+                          color: Colors.black,
                           fontFamily: semiBold,
                           fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.normal,
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
                         ),
                       ),
                       GestureDetector(
@@ -550,12 +559,17 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         },
                         child: SizedBox(
                           height: 30.h,
-                          width: 30.w,
                           child: Center(
-                            child: Image.asset(
-                              arrowNextIc,
-                              height: 20.h,
-                              width: 20.w,
+                            child: Text(
+                              "View All",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: medium,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 12.sp,
+                              ),
                             ),
                           ),
                         ),
@@ -594,12 +608,29 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Image.asset(
-                                    demoHawanImg,
-                                    height: 100.h,
-                                  ),
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.dm),
+                                      child: Image.asset(
+                                        demoHawanImg,
+                                        height: 100.h,
+                                        width: MediaQuery.of(context).size.width,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: Container(
+                                        padding: EdgeInsets.all(5.dm),
+                                        child: Image.asset(
+                                          heartIc,
+                                          height: 20.h,
+                                          width: 20.w,
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 SizedBox(height: 4.h),
                                 Text(
@@ -644,7 +675,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                       fontFamily: semiBold,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
-                                      fontSize: 10.sp,
+                                      fontSize: 12.sp,
                                     ),
                                     children: [
                                       TextSpan(
@@ -654,7 +685,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                           fontFamily: semiBold,
                                           fontWeight: FontWeight.w400,
                                           fontStyle: FontStyle.normal,
-                                          fontSize: 10.sp,
+                                          fontSize: 12.sp,
                                           decoration: TextDecoration.lineThrough,
                                         ),
                                       ),
@@ -683,11 +714,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         "Pooja",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: textDarkCl,
+                          color: Colors.black,
                           fontFamily: semiBold,
                           fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.normal,
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
                         ),
                       ),
                       GestureDetector(
@@ -696,12 +727,17 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         },
                         child: SizedBox(
                           height: 30.h,
-                          width: 30.w,
                           child: Center(
-                            child: Image.asset(
-                              arrowNextIc,
-                              height: 20.h,
-                              width: 20.w,
+                            child: Text(
+                              "View All",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: medium,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 12.sp,
+                              ),
                             ),
                           ),
                         ),
@@ -740,12 +776,29 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Image.asset(
-                                    demoHawanImg,
-                                    height: 100.h,
-                                  ),
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.dm),
+                                      child: Image.asset(
+                                        demoHawanImg,
+                                        height: 100.h,
+                                        width: MediaQuery.of(context).size.width,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: Container(
+                                        padding: EdgeInsets.all(5.dm),
+                                        child: Image.asset(
+                                          heartIc,
+                                          height: 20.h,
+                                          width: 20.w,
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 SizedBox(height: 4.h),
                                 Text(
@@ -790,7 +843,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                       fontFamily: semiBold,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
-                                      fontSize: 10.sp,
+                                      fontSize: 12.sp,
                                     ),
                                     children: [
                                       TextSpan(
@@ -800,7 +853,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                           fontFamily: semiBold,
                                           fontWeight: FontWeight.w400,
                                           fontStyle: FontStyle.normal,
-                                          fontSize: 10.sp,
+                                          fontSize: 12.sp,
                                           decoration: TextDecoration.lineThrough,
                                         ),
                                       ),
@@ -829,11 +882,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         "Because you viewed",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: textDarkCl,
+                          color: Colors.black,
                           fontFamily: semiBold,
                           fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.normal,
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ],

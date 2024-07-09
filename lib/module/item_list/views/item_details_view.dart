@@ -68,49 +68,72 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.asset(
-                    demoHawanImg,
-                    height: 217.h,
-                  ),
-                ),
-                SizedBox(height: 16.h),
-                Text(
-                  "Varalakshmi Vratham",
-                  style: TextStyle(
-                    color: textDarkCl,
-                    fontFamily: medium,
-                    fontWeight: FontWeight.w600,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 16.sp,
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                RichText(
-                  text: TextSpan(
-                    text: "₹ 190  ",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: semiBold,
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 15.sp,
+                Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10.dm),
+                      child: Image.asset(
+                        demoHawanImg,
+                        width: MediaQuery.of(context).size.width,
+                        height: 217.h,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    children: [
-                      TextSpan(
-                        text: "₹ 220",
-                        style: TextStyle(
-                          color: greyTextCl,
-                          fontFamily: semiBold,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 15.sp,
-                          decoration: TextDecoration.lineThrough,
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(10.dm),
+                        child: Image.asset(
+                          heartIc,
+                          height: 24.h,
+                          width: 24.w,
                         ),
                       ),
-                    ],
-                  ),
+                    )
+                  ],
+                ),
+
+                SizedBox(height: 16.h),
+                Row(
+                  children: [
+                    Expanded(child: Text(
+                      "Varalakshmi Vratham",
+                      style: TextStyle(
+                        color: textDarkCl,
+                        fontFamily: medium,
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 16.sp,
+                      ),
+                    ),),
+                    SizedBox(width: 30.h),
+                    RichText(
+                      text: TextSpan(
+                        text: "₹ 190  ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: semiBold,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 15.sp,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: "₹ 220",
+                            style: TextStyle(
+                              color: greyTextCl,
+                              fontFamily: semiBold,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 15.sp,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 16.h),
                 Container(
@@ -972,7 +995,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                   height: 36.h,
                   child: CustomButtonWidget(
                     onPressed: () {
-                      Get.to(() => const AllReviewView(),transition:Transition.rightToLeftWithFade,duration: const Duration(seconds: 1));
+                      Get.to(() => const AllReviewView(), transition: Transition.rightToLeftWithFade, duration: const Duration(seconds: 1));
                     },
                     text: "See All review 120",
                     style: CustomButtonStyle.style3,

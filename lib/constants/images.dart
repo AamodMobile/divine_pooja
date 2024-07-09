@@ -55,6 +55,10 @@ const logoutSheetIc = "assets/icons/logout_sheet_ic.png";
 const deleteSheetIc = "assets/icons/delete_sheet_ic.png";
 const copyOutlineIc = "assets/icons/copy_outline_ic.png";
 const mobileLineIc = "assets/icons/cmobile_line_ic.png";
+const phCameraIc = "assets/icons/ph_camera.png";
+const solarGalleryIc = "assets/icons/solar_gallery.png";
+const heartIc = "assets/icons/heart_ic.png";
+const heartFillIc = "assets/icons/heart_fill_ic.png";
 
 
 //images

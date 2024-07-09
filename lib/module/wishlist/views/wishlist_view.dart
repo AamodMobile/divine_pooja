@@ -3,14 +3,14 @@ import 'package:divine_pooja/core/common_widgets/custom_buttons.dart';
 import 'package:divine_pooja/module/check_out/views/check_out_view.dart';
 import 'package:divine_pooja/module/item_list/views/item_details_view.dart';
 
-class ItemListView extends StatefulWidget {
-  const ItemListView({super.key});
+class WishListView extends StatefulWidget {
+  const WishListView({super.key});
 
   @override
-  State<ItemListView> createState() => _ItemListViewState();
+  State<WishListView> createState() => _WishListViewState();
 }
 
-class _ItemListViewState extends State<ItemListView> with TickerProviderStateMixin {
+class _WishListViewState extends State<WishListView> with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
   List itemList = ["1"];
@@ -62,7 +62,7 @@ class _ItemListViewState extends State<ItemListView> with TickerProviderStateMix
               ),
               SizedBox(width: 14.w),
               Text(
-                "Homa /Haven",
+                "WishList",
                 style: TextStyle(
                   color: textDarkCl,
                   fontFamily: medium,
@@ -73,50 +73,6 @@ class _ItemListViewState extends State<ItemListView> with TickerProviderStateMix
               ),
             ],
           ),
-          actions: [
-            GestureDetector(
-              onTap: () {
-                Get.to(() => const CheckOutView(), transition: Transition.rightToLeft, duration: const Duration(milliseconds: 500));
-              },
-              child: SizedBox(
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Image.asset(
-                        cartIc,
-                        height: 24.h,
-                        width: 24.w,
-                      ),
-                    ),
-                    Positioned(
-                      right: 0,
-                      top: -5,
-                      child: Container(
-                        padding: EdgeInsets.all(4.w),
-                        decoration: const BoxDecoration(
-                          color: mainColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Text(
-                          "0",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: regular,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 8.sp,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(width: 15.w),
-          ],
         ),
         body: Padding(
           padding: EdgeInsets.all(14.h),
@@ -187,7 +143,7 @@ class _ItemListViewState extends State<ItemListView> with TickerProviderStateMix
                                       child: Container(
                                         padding: EdgeInsets.all(5.dm),
                                         child: Image.asset(
-                                          heartIc,
+                                          heartFillIc,
                                           height: 20.h,
                                           width: 20.w,
                                         ),

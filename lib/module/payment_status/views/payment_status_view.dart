@@ -1,5 +1,6 @@
 import 'package:divine_pooja/constants/constants.dart';
 import 'package:divine_pooja/module/my_order/views/my_order_view.dart';
+import 'package:divine_pooja/module/my_order/views/order_details_view.dart';
 
 class PaymentStatusView extends StatefulWidget {
   const PaymentStatusView({super.key});
@@ -313,7 +314,7 @@ class _PaymentStatusViewState extends State<PaymentStatusView> {
                           ),
                           GestureDetector(
                             onTap: (){
-
+                             Get.to(()=>const OrderDetailsView());
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(vertical: 7.h,horizontal: 22.w),

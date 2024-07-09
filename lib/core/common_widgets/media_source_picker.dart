@@ -33,7 +33,7 @@ class MediaSourcePicker extends StatelessWidget {
                 Container(
                   width: 35.h,
                   height: 35.h,
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(5),
                   decoration: ShapeDecoration(
                     color: const Color(0xFFF3F3F3),
                     shape: RoundedRectangleBorder(
@@ -41,9 +41,10 @@ class MediaSourcePicker extends StatelessWidget {
                     ),
                   ),
                   child: Image.asset(
-                    sendIc,
+                    solarGalleryIc,
                     height: 20,
                     width: 20,
+                    color: const Color(0xFF1B1B1B),
                   ),
                 ),
                 const SizedBox(
@@ -70,7 +71,7 @@ class MediaSourcePicker extends StatelessWidget {
                 Container(
                   width: 35.h,
                   height: 35.h,
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(5),
                   decoration: ShapeDecoration(
                     color: const Color(0xFFF3F3F3),
                     shape: RoundedRectangleBorder(
@@ -78,9 +79,10 @@ class MediaSourcePicker extends StatelessWidget {
                     ),
                   ),
                   child: Image.asset(
-                    sendIc,
+                    phCameraIc,
                     height: 20,
                     width: 20,
+                    color: const Color(0xFF1B1B1B),
                   ),
                 ),
                 const SizedBox(
