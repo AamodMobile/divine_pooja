@@ -3,6 +3,7 @@ import 'package:divine_pooja/core/common_widgets/custom_input_fields.dart';
 import 'package:divine_pooja/module/home/widgets/otp_bottom_sheet.dart';
 
 class NewMobileSheet {
+  final FocusNode _focusNode = FocusNode();
   Future<String?> show(BuildContext context) async {
     return await showModalBottomSheet<String>(
       context: context,
@@ -95,6 +96,9 @@ class NewMobileSheet {
                           CustomTextField(
                             borderCl: borderClLightMain,
                             hintText: "Enter Number",
+                            maxLength: 10,
+                            txKeyboardType: TextInputType.number,
+                            focusNode: _focusNode,
                             labelWidget: Row(
                               children: [
                                 Image.asset(
@@ -143,7 +147,7 @@ class NewMobileSheet {
                                 child: GestureDetector(
                                   onTap: () {
                                     Get.back();
-                                    OTPSheet().show(context);
+                                    OTPSheet().show(context,"+91");
                                   },
                                   child: Container(
                                     padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -174,6 +178,8 @@ class NewMobileSheet {
                         ],
                       ),
                     ),
+                    if(_focusNode.hasFocus)
+                      SizedBox(height: 150.h,)
                   ],
                 ),
               ],

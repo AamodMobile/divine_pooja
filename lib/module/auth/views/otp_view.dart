@@ -1,17 +1,21 @@
-import 'package:divine_pooja/service/api_logs.dart';
 import 'package:divine_pooja/constants/constants.dart';
 import 'package:divine_pooja/core/common_widgets/custom_buttons.dart';
-import 'package:divine_pooja/module/home/views/home_view.dart';
+import 'package:divine_pooja/module/auth/controllers/auth_controller.dart';
+import 'package:divine_pooja/service/api_logs.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpView extends StatefulWidget {
-  const OtpView({super.key});
+  final String mobile;
+
+  const OtpView({super.key, required this.mobile});
 
   @override
   State<OtpView> createState() => _OtpViewState();
 }
 
 class _OtpViewState extends State<OtpView> {
+  AuthController controller = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -76,7 +80,7 @@ class _OtpViewState extends State<OtpView> {
                         height: 6.h,
                       ),
                       Text(
-                        "89478888120",
+                        widget.mobile,
                         style: TextStyle(
                           color: borderCl,
                           fontFamily: regular,
@@ -135,13 +139,12 @@ class _OtpViewState extends State<OtpView> {
                   appContext: context,
                   length: 4,
                   onChanged: (String value) {
+                    controller.otp = value;
                     Log.console(value);
                   },
                 ),
               ),
-              SizedBox(
-                height: 16.h
-              ),
+              SizedBox(height: 16.h),
               Text(
                 "Resend OTP",
                 style: TextStyle(
@@ -152,14 +155,16 @@ class _OtpViewState extends State<OtpView> {
                   fontSize: 15.sp,
                 ),
               ),
-              SizedBox(
-                  height: 58.h
-              ),
+              SizedBox(height: 58.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: CustomButtonWidget(
                   onPressed: () {
-                    Get.offAll(()=>const HomeView());
+                    if (controller.otp.length < 4) {
+                      errorToast("Enter Valid Otp");
+                    } else {
+                      controller.verifyOtp();
+                    }
                   },
                   text: 'Verify',
                 ),

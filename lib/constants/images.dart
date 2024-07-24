@@ -76,3 +76,4 @@ const emptyCartImg = "assets/images/empty_cart_img.png";
 const noAddressImg = "assets/images/no_address_img.png";
 const noOrderImg = "assets/images/no_order_img.png";
 const subtractImg = "assets/images/subtract_img.png";
+const uploadImg = "assets/images/upload_img.png";

@@ -1,4 +1,7 @@
 import 'package:divine_pooja/constants/constants.dart';
+import 'package:divine_pooja/core/common_widgets/loader_class.dart';
+import 'package:divine_pooja/module/help_support/controllers/help_support_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpAndSupportView extends StatefulWidget {
   const HelpAndSupportView({super.key});
@@ -8,210 +11,259 @@ class HelpAndSupportView extends StatefulWidget {
 }
 
 class _HelpAndSupportViewState extends State<HelpAndSupportView> {
+  HelpSupportController controller = Get.put(HelpSupportController());
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: homeBgCl,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
-          title: Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Image.asset(
-                  arrowBackIc,
-                  height: 24.h,
-                  width: 24.w,
-                ),
-              ),
-              SizedBox(width: 14.w),
-              Text(
-                "Help and Support",
-                style: TextStyle(
-                  color: textDarkCl,
-                  fontFamily: medium,
-                  fontWeight: FontWeight.w600,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 16.sp,
-                ),
-              ),
-            ],
-          ),
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 17.w),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 16.h,
-                width: MediaQuery.of(context).size.width,
-              ),
-              Image.asset(
-                helpImg,
-                width: 197.w,
-                height: 200.h,
-              ),
-              SizedBox(height: 17.h),
-              Text(
-                "Hello, How Can We ",
-                style: TextStyle(
-                  color: textDarkCl,
-                  fontFamily: medium,
-                  fontWeight: FontWeight.w600,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 16.sp,
-                ),
-              ),
-              Text(
-                "Help You?",
-                style: TextStyle(
-                  color: mainColor,
-                  fontFamily: medium,
-                  fontWeight: FontWeight.w600,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 16.sp,
-                ),
-              ),
-              SizedBox(height: 70.h),
-              Container(
-                padding: EdgeInsets.all(10.h),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.dm),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.20),
-                      blurRadius: 6,
-                      spreadRadius: 0,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Row(
+    return GetBuilder(
+      init: Get.find<HelpSupportController>(),
+      initState: (state) {
+        Get.find<HelpSupportController>().contactUsGet();
+      },
+      builder: (contextCtr) {
+        return SafeArea(
+          child: Scaffold(
+              backgroundColor: homeBgCl,
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                automaticallyImplyLeading: false,
+                title: Row(
                   children: [
-                    Image.asset(
-                      whatsappIc,
-                      height: 26.h,
-                      width: 26.w,
-                    ),
-                    SizedBox(
-                      width: 12.w,
-                    ),
-                    Text(
-                      "Chat On WhatsApp",
-                      style: TextStyle(
-                        color: borderCl,
-                        fontFamily: medium,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 14.sp,
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Image.asset(
+                        arrowBackIc,
+                        height: 24.h,
+                        width: 24.w,
                       ),
                     ),
-                    const Spacer(),
-                    Image.asset(
-                      arrowForwardIc,
-                      height: 24.h,
-                      width: 12.w,
+                    SizedBox(width: 14.w),
+                    Text(
+                      "Help and Support",
+                      style: TextStyle(
+                        color: textDarkCl,
+                        fontFamily: medium,
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 16.sp,
+                      ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 22.h),
-              Container(
-                padding: EdgeInsets.all(10.h),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.dm),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.20),
-                      blurRadius: 6,
-                      spreadRadius: 0,
-                      offset: const Offset(0, 2),
+              body: Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 17.w),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 16.h,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                        Image.asset(
+                          helpImg,
+                          width: 197.w,
+                          height: 200.h,
+                        ),
+                        SizedBox(height: 17.h),
+                        Text(
+                          "Hello, How Can We ",
+                          style: TextStyle(
+                            color: textDarkCl,
+                            fontFamily: medium,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                        Text(
+                          "Help You?",
+                          style: TextStyle(
+                            color: mainColor,
+                            fontFamily: medium,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                        SizedBox(height: 70.h),
+                        GestureDetector(
+                          onTap: () async {
+                            await launchUrl(
+                              Uri.parse("https://wa.me/91${contextCtr.mobile}/?text=Hii...moneyverss App"),
+                              mode: LaunchMode.externalApplication,
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10.h),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.dm),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.20),
+                                  blurRadius: 6,
+                                  spreadRadius: 0,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  whatsappIc,
+                                  height: 26.h,
+                                  width: 26.w,
+                                ),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Text(
+                                  "Chat On WhatsApp",
+                                  style: TextStyle(
+                                    color: borderCl,
+                                    fontFamily: medium,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 14.sp,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Image.asset(
+                                  arrowForwardIc,
+                                  height: 24.h,
+                                  width: 12.w,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 22.h),
+                        GestureDetector(
+                          onTap: () async {
+                            var url = "tel:91${contextCtr.mobile.value}";
+                            if (await launchUrl(Uri.parse(url))) {
+                              await launchUrl(Uri.parse(url));
+                            } else {
+                              throw 'Could not launch $url';
+                            }
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10.h),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.dm),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.20),
+                                  blurRadius: 6,
+                                  spreadRadius: 0,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  phoneIc,
+                                  height: 26.h,
+                                  width: 26.w,
+                                ),
+                                SizedBox(
+                                  width: 12.w,
+                                ),
+                                Text(
+                                  "Customer Care support",
+                                  style: TextStyle(
+                                    color: borderCl,
+                                    fontFamily: medium,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 14.sp,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Image.asset(
+                                  arrowForwardIc,
+                                  height: 24.h,
+                                  width: 12.w,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 22.h),
+                        GestureDetector(
+                            onTap: () async {
+                              final Uri params = Uri(
+                                scheme: 'mailto',
+                                path: contextCtr.email.value,
+                                query: 'subject=Support & body=Hi,Divine App',
+                              );
+                              await launchUrl(
+                                (params),
+                                mode: LaunchMode.externalApplication,
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10.h),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10.dm),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.20),
+                                    blurRadius: 6,
+                                    spreadRadius: 0,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    communicationIc,
+                                    height: 26.h,
+                                    width: 26.w,
+                                  ),
+                                  SizedBox(
+                                    width: 12.w,
+                                  ),
+                                  Text(
+                                    "Email",
+                                    style: TextStyle(
+                                      color: borderCl,
+                                      fontFamily: medium,
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 14.sp,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Image.asset(
+                                    arrowForwardIc,
+                                    height: 24.h,
+                                    width: 12.w,
+                                  ),
+                                ],
+                              ),
+                            ))
+                      ],
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      phoneIc,
-                      height: 26.h,
-                      width: 26.w,
-                    ),
-                    SizedBox(
-                      width: 12.w,
-                    ),
-                    Text(
-                      "Customer Care support",
-                      style: TextStyle(
-                        color: borderCl,
-                        fontFamily: medium,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 14.sp,
-                      ),
-                    ),
-                    const Spacer(),
-                    Image.asset(
-                      arrowForwardIc,
-                      height: 24.h,
-                      width: 12.w,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 22.h),
-              Container(
-                padding: EdgeInsets.all(10.h),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.dm),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.20),
-                      blurRadius: 6,
-                      spreadRadius: 0,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      communicationIc,
-                      height: 26.h,
-                      width: 26.w,
-                    ),
-                    SizedBox(
-                      width: 12.w,
-                    ),
-                    Text(
-                      "Email",
-                      style: TextStyle(
-                        color: borderCl,
-                        fontFamily: medium,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 14.sp,
-                      ),
-                    ),
-                    const Spacer(),
-                    Image.asset(
-                      arrowForwardIc,
-                      height: 24.h,
-                      width: 12.w,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+                  ),
+                  Builder(builder: (context) {
+                    if (contextCtr.isLoading) {
+                      return LoaderClass(height: MediaQuery.of(context).size.height);
+                    }
+                    return const SizedBox();
+                  })
+                ],
+              )),
+        );
+      },
     );
   }
 }

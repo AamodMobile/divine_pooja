@@ -14,9 +14,9 @@ class SplashController extends GetxController implements GetxService {
       (value) {
         if (crtData != null) {
           UserModel crtUser = UserModel.fromJson(jsonDecode(crtData));
-          Get.offAll(() => const HomeView(), transition: Transition.rightToLeftWithFade, duration: const Duration(seconds: 2));
+          Get.offAll(() => const HomeView(), transition: Transition.rightToLeftWithFade, duration: const Duration(milliseconds: 200));
         } else {
-          Get.offAll(() => const IntroView(), transition: Transition.rightToLeftWithFade, duration: const Duration(seconds: 2));
+          Get.offAll(() => const IntroView(), transition: Transition.rightToLeftWithFade, duration: const Duration(milliseconds: 200));
         }
       },
     );

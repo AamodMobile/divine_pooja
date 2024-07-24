@@ -1,9 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:divine_pooja/constants/constants.dart';
-import 'package:divine_pooja/module/my_order/views/my_order_view.dart';
+import 'package:divine_pooja/module/check_out/models/success_payment_model.dart';
+import 'package:divine_pooja/module/home/views/home_view.dart';
 import 'package:divine_pooja/module/my_order/views/order_details_view.dart';
+import 'package:divine_pooja/service/api_url.dart';
 
 class PaymentStatusView extends StatefulWidget {
-  const PaymentStatusView({super.key});
+  final SuccessPaymentModel successPaymentModel;
+
+  const PaymentStatusView({super.key, required this.successPaymentModel});
 
   @override
   State<PaymentStatusView> createState() => _PaymentStatusViewState();
@@ -12,335 +17,351 @@ class PaymentStatusView extends StatefulWidget {
 class _PaymentStatusViewState extends State<PaymentStatusView> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: homeBgCl,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
-          title: Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Image.asset(
-                  arrowBackIc,
-                  height: 24.h,
-                  width: 24.w,
-                ),
-              ),
-              SizedBox(width: 14.w),
-              Text(
-                "Payment Done",
-                style: TextStyle(
-                  color: textDarkCl,
-                  fontFamily: medium,
-                  fontWeight: FontWeight.w600,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 16.sp,
-                ),
-              ),
-            ],
-          ),
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14.w),
-          child: SingleChildScrollView(
-            child: Column(
+    return WillPopScope(
+      onWillPop: () async {
+        bool willLeave = false;
+        Get.offAll(() => const HomeView());
+        return willLeave;
+      },
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: homeBgCl,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
+            title: Row(
               children: [
-                SizedBox(height: 16.h),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 22.h),
-                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10.dm)),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        doneGif,
-                        height: 136.h,
-                        width: 162.w,
-                      ),
-                      SizedBox(height: 17.h),
-                      Text(
-                        "Order Successfully!",
-                        style: TextStyle(
-                          color: greenCl,
-                          fontFamily: semiBold,
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 16.sp,
-                        ),
-                      ),
-                      SizedBox(height: 17.h),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.w),
-                        child: Text(
-                          "Payment is successfully Processed And Your Order In On the Way",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: textDarkCl,
-                            fontFamily: regular,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 12.h),
-                      Divider(
-                        color: borderClLightMain,
-                        height: 1.h,
-                      ),
-                      SizedBox(height: 12.h),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Order Details",
-                          style: TextStyle(
-                            color: textDarkCl,
-                            fontFamily: medium,
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 7.h),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Your Order # Is : 6445874114",
-                          style: TextStyle(
-                            color: hintColor,
-                            fontFamily: regular,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 24.h),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "This Order Will be Shipped To:",
-                          style: TextStyle(
-                            color: textDarkCl,
-                            fontFamily: medium,
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 7.h),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Vaishali Tower 2nd Nursery Circle Vaishali Nagar Jaipur 302021",
-                          style: TextStyle(
-                            color: hintColor,
-                            fontFamily: regular,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 24.h),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Payment Methed:",
-                          style: TextStyle(
-                            color: textDarkCl,
-                            fontFamily: medium,
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 7.h),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Google pay UPI",
-                          style: TextStyle(
-                            color: hintColor,
-                            fontFamily: regular,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ),
-                    ],
+                GestureDetector(
+                  onTap: () {
+                    Get.offAll(() => const HomeView());
+                  },
+                  child: Image.asset(
+                    arrowBackIc,
+                    height: 24.h,
+                    width: 24.w,
                   ),
                 ),
-                SizedBox(height: 14.h),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 9.w, vertical: 9.h),
-                  margin: EdgeInsets.only(bottom: 14.h),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(6.dm),
-                    border: Border.all(
-                      color: borderClLightMain,
-                      width: 1.w,
+                SizedBox(width: 14.w),
+                Text(
+                  "Payment Done",
+                  style: TextStyle(
+                    color: textDarkCl,
+                    fontFamily: medium,
+                    fontWeight: FontWeight.w600,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 14.w),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 16.h),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 22.h),
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10.dm)),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          doneGif,
+                          height: 136.h,
+                          width: 162.w,
+                        ),
+                        SizedBox(height: 17.h),
+                        Text(
+                          "Order Successfully!",
+                          style: TextStyle(
+                            color: greenCl,
+                            fontFamily: semiBold,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                        SizedBox(height: 17.h),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 30.w),
+                          child: Text(
+                            "Payment is successfully Processed And Your Order In On the Way",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: textDarkCl,
+                              fontFamily: regular,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 12.h),
+                        Divider(
+                          color: borderClLightMain,
+                          height: 1.h,
+                        ),
+                        SizedBox(height: 12.h),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Order Details",
+                            style: TextStyle(
+                              color: textDarkCl,
+                              fontFamily: medium,
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 7.h),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Your Order # Is : ${widget.successPaymentModel.orderId}",
+                            style: TextStyle(
+                              color: hintColor,
+                              fontFamily: regular,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 24.h),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "This Order Will be Shipped To:",
+                            style: TextStyle(
+                              color: textDarkCl,
+                              fontFamily: medium,
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 7.h),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "${widget.successPaymentModel.address?.shippingHouseNumber} ${widget.successPaymentModel.address?.shippingApartmentName} ${widget.successPaymentModel.address?.nearByLandmark} ${widget.successPaymentModel.address?.shippingCity} ${widget.successPaymentModel.address?.shippingPostcode}",
+                            style: TextStyle(
+                              color: hintColor,
+                              fontFamily: regular,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 24.h),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Payment Methed:",
+                            style: TextStyle(
+                              color: textDarkCl,
+                              fontFamily: medium,
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 7.h),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            widget.successPaymentModel.paymentMethod.toString(),
+                            style: TextStyle(
+                              color: hintColor,
+                              fontFamily: regular,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10.dm),
-                            child: Image.asset(
-                              demoHawanImg,
-                              width: 72.w,
-                              height: 56.h,
+                  SizedBox(height: 14.h),
+                  MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: widget.successPaymentModel.orderDetails?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          padding: EdgeInsets.symmetric(horizontal: 9.w, vertical: 9.h),
+                          margin: EdgeInsets.only(bottom: 14.h),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(6.dm),
+                            border: Border.all(
+                              color: borderClLightMain,
+                              width: 1.w,
                             ),
                           ),
-                          SizedBox(width: 10.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Column(
                             children: [
-                              Text(
-                                "Ganapathi Homam",
-                                style: TextStyle(
-                                  color: textDarkCl,
-                                  fontFamily: medium,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 12.sp,
-                                ),
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  text: "Qty : 1",
-                                  style: TextStyle(
-                                    color: textDarkCl,
-                                    fontFamily: medium,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 10.sp,
-                                  ),
-                                ),
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  text: "₹ 190",
-                                  style: TextStyle(
-                                    color: textDarkCl,
-                                    fontFamily: medium,
-                                    fontWeight: FontWeight.w600,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 10.sp,
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                      text: "  ₹ 220",
-                                      style: TextStyle(
-                                          color: hintColor, fontFamily: medium, fontWeight: FontWeight.w400, fontStyle: FontStyle.normal, fontSize: 10.sp, decoration: TextDecoration.lineThrough),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 80.w,
+                                    height: 80.h,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.dm),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 8.h),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.all(5.w),
-                        decoration: BoxDecoration(color: const Color(0xFFFFEDDD), borderRadius: BorderRadius.circular(6.dm)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Your Comment",
-                              style: TextStyle(
-                                color: textDarkCl,
-                                fontFamily: medium,
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 10.sp,
-                              ),
-                            ),
-                            SizedBox(height: 6.h),
-                            Text(
-                              "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a",
-                              style: TextStyle(
-                                color: textDarkCl,
-                                fontFamily: medium,
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 10.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 12.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text: "Status : ",
-                              style: TextStyle(
-                                color: textDarkCl,
-                                fontFamily: medium,
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 12.sp,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: "Tracking Update",
-                                  style: TextStyle(
-                                    color: hintColor,
-                                    fontFamily: medium,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 12.sp,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.dm),
+                                      child: widget.successPaymentModel.orderDetails![index].productImage != ""
+                                          ? CachedNetworkImage(
+                                              errorWidget: (context, url, error) => Image.asset(
+                                                demoHawanImg,
+                                                width: 72.w,
+                                                height: 56.h,
+                                                fit: BoxFit.fill,
+                                              ),
+                                              width: 72.w,
+                                              height: 56.h,
+                                              fit: BoxFit.fill,
+                                              imageUrl: ApiUrl.imageUrl + widget.successPaymentModel.orderDetails![index].productImage.toString(),
+                                              placeholder: (a, b) => const Center(
+                                                child: CircularProgressIndicator(
+                                                  color: mainColor,
+                                                ),
+                                              ),
+                                            )
+                                          : Image.asset(
+                                              demoHawanImg,
+                                              fit: BoxFit.fill,
+                                            ),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "${widget.successPaymentModel.orderDetails![index].productName}",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: semiBold,
+                                            fontWeight: FontWeight.w500,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                        SizedBox(height: 5.h),
+                                        Text(
+                                          "Qty : ${widget.successPaymentModel.orderDetails![index].quantity}",
+                                          style: TextStyle(
+                                            color: textDarkCl,
+                                            fontFamily: medium,
+                                            fontWeight: FontWeight.w500,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                        SizedBox(height: 5.h),
+                                        Text(
+                                          "₹ ${widget.successPaymentModel.orderDetails![index].totalAmount}",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: semiBold,
+                                            fontWeight: FontWeight.w500,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                        SizedBox(height: 5.h),
+                                        Text(
+                                          "Order Id : ${widget.successPaymentModel.orderDetails![index].orderId}",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: semiBold,
+                                            fontWeight: FontWeight.w500,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: 8.h),
+                              SizedBox(height: 12.h),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      text: "Status : ",
+                                      style: TextStyle(
+                                        color: textDarkCl,
+                                        fontFamily: medium,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12.sp,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: widget.successPaymentModel.orderDetails![index].deliveryStatus.toString().capitalize,
+                                          style: TextStyle(
+                                            color: hintColor,
+                                            fontFamily: medium,
+                                            fontWeight: FontWeight.w400,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => OrderDetailsView(id: widget.successPaymentModel.orderDetails![index].id.toString()),
+                                          transition: Transition.rightToLeftWithFade, duration: const Duration(milliseconds: 300));
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 22.w),
+                                      decoration: BoxDecoration(
+                                        color: mainColor,
+                                        borderRadius: BorderRadius.circular(4.dm),
+                                      ),
+                                      child: Text(
+                                        "Track Order",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: medium,
+                                          fontWeight: FontWeight.w500,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
                           ),
-                          GestureDetector(
-                            onTap: (){
-                             Get.to(()=>const OrderDetailsView());
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 7.h,horizontal: 22.w),
-                              decoration: BoxDecoration(
-                                color: mainColor,
-                                borderRadius: BorderRadius.circular(4.dm),
-                              ),
-                              child: Text(
-                                "Track Order",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: medium,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height: 16.h),
-              ],
+                        );
+                      },
+                    ),), SizedBox(height: 16.h),
+                ],
+              ),
             ),
           ),
         ),

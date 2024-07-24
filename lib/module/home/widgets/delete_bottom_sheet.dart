@@ -1,7 +1,8 @@
 import 'package:divine_pooja/constants/constants.dart';
+import 'package:divine_pooja/module/home/controllers/home_controller.dart';
 
 class DeleteSheet {
-  Future<String?> show(BuildContext context) async {
+  Future<String?> show(BuildContext context,HomeController controller) async {
     return await showModalBottomSheet<String>(
       context: context,
       backgroundColor: Colors.transparent,
@@ -139,7 +140,7 @@ class DeleteSheet {
                               Expanded(
                                 child: GestureDetector(
                                   onTap: () {
-                                    Get.back();
+                                   controller.deleteAccount();
                                   },
                                   child: Container(
                                     padding: EdgeInsets.symmetric(vertical: 10.h),

@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:divine_pooja/constants/constants.dart';
+import 'package:divine_pooja/module/home/controllers/home_controller.dart';
+import 'package:divine_pooja/module/item_list/controllers/item_controller.dart';
 import 'package:divine_pooja/module/splash/views/splash_view.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -39,6 +41,10 @@ class MyApp extends StatelessWidget {
           left: false,
           right: false,
           child: GetMaterialApp(
+            initialBinding: BindingsBuilder(() {
+              Get.put(HomeController());
+              Get.put(ItemController());
+            }),
             title: 'Divine Pooja',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(

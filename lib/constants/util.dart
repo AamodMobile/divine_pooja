@@ -1,65 +1,50 @@
-import 'package:divine_pooja/constants/constants.dart';
-import 'package:flutter/material.dart';
+import 'constants.dart';
 
-
-
-void successToast(BuildContext context, String msg) {
-  ScaffoldMessenger.of(context).removeCurrentSnackBar();
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      duration: const Duration(seconds: 2),
-      content: Text(msg,style: TextStyle(
-        color: Colors.black,
-      ),),
-      backgroundColor: Colors.green,
-      margin: const EdgeInsets.only(top: 70, left: 10, right: 10), // Adjust margin as needed
-      behavior: SnackBarBehavior.floating,
-    ),
+successToast(String msg) {
+  Get.closeAllSnackbars();
+  Get.snackbar(
+    duration: const Duration(seconds: 2),
+    '',
+    msg,
+    titleText: const SizedBox.shrink(),
+    snackPosition: SnackPosition.TOP,
+    backgroundColor: Colors.green,
+    colorText: Colors.black,
+    margin: const EdgeInsets.all(10),
   );
 }
 
-void errorToast(BuildContext context, String msg) {
-  ScaffoldMessenger.of(context).removeCurrentSnackBar();
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      duration: const Duration(seconds: 2),
-      content: Text(msg,style: TextStyle(
-        color:  Colors.white,
-      ),),
-      backgroundColor: Colors.red,
-      margin: const EdgeInsets.only(top: 70, left: 10, right: 10), // Adjust margin as needed
-      behavior: SnackBarBehavior.floating,
-    ),
+errorToast(String msg) {
+  Get.closeAllSnackbars();
+  Get.snackbar(
+    duration: const Duration(seconds: 2),
+    '',
+    msg,
+    titleText: const SizedBox.shrink(),
+    snackPosition: SnackPosition.TOP,
+    backgroundColor: Colors.red,
+    colorText: Colors.white,
+    margin: const EdgeInsets.all(10),
   );
 }
 
-
-void showProgress(BuildContext context) {
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext context) {
-      return WillPopScope(
+showProgress() {
+  Get.dialog(
+      WillPopScope(
         onWillPop: () async {
           return false;
         },
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          color: mainColor.withOpacity(0.25),
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircularProgressIndicator(color: Colors.white),
-            ],
+        child: const Center(
+          child: CircularProgressIndicator(
+            color: mainColor,
           ),
         ),
-      );
-    },
-  );
+      ),
+      barrierDismissible: false);
 }
 
-void closeProgress(BuildContext context) {
-  Navigator.of(context, rootNavigator: true).pop();
+closeProgress() {
+  if (Get.isDialogOpen ?? false) {
+    Get.back();
+  }
 }

@@ -1,15 +1,9 @@
 import 'package:divine_pooja/constants/constants.dart';
 import 'package:divine_pooja/module/add_address/views/add_address_view.dart';
+import 'package:divine_pooja/module/check_out/controllers/cart_controller.dart';
 
 class ProblemLocationSheet {
-  final List<String> location = [
-    "Califon, United States",
-    "California, United States",
-    "California City, United States",
-  ];
-  String selectedValue = "";
-
-  Future<String?> show(BuildContext context) async {
+  Future<String?> show(BuildContext context, CartController controller) async {
     return await showModalBottomSheet<String>(
       context: context,
       backgroundColor: Colors.transparent,
@@ -20,15 +14,20 @@ class ProblemLocationSheet {
           builder: (context, setState) {
             return Wrap(
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Image.asset(
-                      cancelFillIc,
-                      color: Colors.white,
-                      height: 24.h,
-                      width: 24.w,
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Image.asset(
+                        cancelFillIc,
+                        color: Colors.white,
+                        height: 24.h,
+                        width: 24.w,
+                      ),
                     ),
                   ),
                 ),
@@ -64,9 +63,12 @@ class ProblemLocationSheet {
                           ),
                           SizedBox(height: 15.h),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               Get.back();
-                              Get.to(() => const AddAddressView());
+                              var result = await Get.to(() =>  AddAddressView(addressId: '', isEdit: false,));
+                              if (result != null) {
+                                controller.cartListGet(false);
+                              }
                             },
                             child: Text(
                               "+ Add another address",
@@ -88,27 +90,29 @@ class ProblemLocationSheet {
                             removeRight: true,
                             context: context,
                             child: ListView.builder(
-                              itemCount: location.length,
+                              itemCount: controller.addressList.length,
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    setState(() {
-                                      selectedValue = location[index];
-                                    });
+                                    controller.addressUpdate(
+                                        "${controller.addressList[index].houseNumber} ${controller.addressList[index].apartmentName} ${controller.addressList[index].nearByLandmark} ${controller.addressList[index].city} ${controller.addressList[index].pincode}",
+                                        controller.addressList[index].id.toString());
+                                    setState(() {});
                                   },
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       GestureDetector(
                                         onTap: () {
-                                          setState(() {
-                                            selectedValue = location[index];
-                                          });
+                                          controller.addressUpdate(
+                                              "${controller.addressList[index].houseNumber} ${controller.addressList[index].apartmentName} ${controller.addressList[index].nearByLandmark} ${controller.addressList[index].city} ${controller.addressList[index].pincode}",
+                                              controller.addressList[index].id.toString());
+                                          setState(() {});
                                         },
                                         child: Image.asset(
-                                          selectedValue == location[index] ? circleSelectIc : circleDefultIc,
+                                          controller.selectedValue.value == controller.addressList[index].id.toString() ? circleSelectIc : circleDefultIc,
                                           height: 18.h,
                                           width: 18.w,
                                         ),
@@ -119,9 +123,9 @@ class ProblemLocationSheet {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "Home",
+                                              controller.addressList[index].addressType!.toUpperCase(),
                                               style: TextStyle(
-                                                color: selectedValue == location[index] ? mainColor : textDarkCl,
+                                                color: controller.selectedValue.value == controller.addressList[index].id.toString() ? mainColor : textDarkCl,
                                                 fontFamily: regular,
                                                 fontSize: 14.sp,
                                                 fontStyle: FontStyle.normal,
@@ -130,7 +134,7 @@ class ProblemLocationSheet {
                                             ),
                                             SizedBox(height: 5.h),
                                             Text(
-                                              location[index],
+                                              "${controller.addressList[index].houseNumber} ${controller.addressList[index].apartmentName} ${controller.addressList[index].nearByLandmark} ${controller.addressList[index].city} ${controller.addressList[index].pincode}",
                                               style: TextStyle(
                                                 color: hintColor,
                                                 fontFamily: regular,
@@ -143,7 +147,13 @@ class ProblemLocationSheet {
                                             Row(
                                               children: [
                                                 GestureDetector(
-                                                  onTap: () {},
+                                                  onTap: () async {
+                                                    Get.back();
+                                                    var result = await Get.to(() => AddAddressView(addressId: controller.addressList[index].id.toString(), isEdit: true,addressListModel:  controller.addressList[index],));
+                                                    if (result != null) {
+                                                      controller.cartListGet(false);
+                                                    }
+                                                  },
                                                   child: Container(
                                                     padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
                                                     decoration: BoxDecoration(
@@ -164,7 +174,9 @@ class ProblemLocationSheet {
                                                 ),
                                                 SizedBox(width: 10.w),
                                                 GestureDetector(
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    controller.deleteAddress(controller.addressList[index].id.toString());
+                                                  },
                                                   child: Container(
                                                     padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
                                                     decoration: BoxDecoration(
@@ -224,7 +236,7 @@ class ProblemLocationSheet {
                             children: [
                               Expanded(
                                 child: GestureDetector(
-                                  onTap: (){
+                                  onTap: () {
                                     Get.back();
                                   },
                                   child: Container(

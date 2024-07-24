@@ -1,6 +1,8 @@
 import 'package:divine_pooja/constants/constants.dart';
+import 'package:divine_pooja/module/auth/views/login_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogoutSheet {
   Future<String?> show(BuildContext context) async {
@@ -138,8 +140,11 @@ class LogoutSheet {
                               SizedBox(width: 8.w),
                               Expanded(
                                 child: GestureDetector(
-                                  onTap: () {
-                                    Get.back();
+                                  onTap: () async {
+                                    SharedPreferences preferences =
+                                        await SharedPreferences.getInstance();
+                                    await preferences.clear();
+                                    Get.offAll(() => const LoginView());
                                   },
                                   child: Container(
                                     padding: EdgeInsets.symmetric(vertical: 10.h),

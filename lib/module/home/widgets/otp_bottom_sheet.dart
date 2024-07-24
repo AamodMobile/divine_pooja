@@ -4,7 +4,8 @@ import 'package:divine_pooja/service/api_logs.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OTPSheet {
-  Future<String?> show(BuildContext context) async {
+  final FocusNode _focusNode = FocusNode();
+  Future<String?> show(BuildContext context,String mobileNo) async {
     return await showModalBottomSheet<String>(
       context: context,
       backgroundColor: Colors.transparent,
@@ -65,7 +66,7 @@ class OTPSheet {
                               ),
                               SizedBox(height: 10.h),
                               Text(
-                                "To Access profile Enter OTP Sent To +91 89478414",
+                                "To Access profile Enter OTP Sent To $mobileNo",
                                 style: TextStyle(
                                   color: borderCl,
                                   fontFamily: regular,
@@ -84,6 +85,7 @@ class OTPSheet {
                               cursorColor: mainColor,
                               keyboardType: TextInputType.number,
                               obscureText: false,
+                              focusNode: _focusNode,
                               obscuringCharacter: "*",
                               textStyle: const TextStyle(
                                 color: mainColor,
@@ -189,6 +191,8 @@ class OTPSheet {
                         ],
                       ),
                     ),
+                    if(_focusNode.hasFocus)
+                      SizedBox(height: 60.h,)
                   ],
                 ),
               ],

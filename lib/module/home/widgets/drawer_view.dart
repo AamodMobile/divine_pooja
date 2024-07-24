@@ -3,18 +3,21 @@ import 'dart:io';
 import 'package:divine_pooja/constants/constants.dart';
 import 'package:divine_pooja/core/common_widgets/media_source_picker.dart';
 import 'package:divine_pooja/core/utils/image_picker_utils.dart';
+import 'package:divine_pooja/module/add_address/views/my_address_view.dart';
 import 'package:divine_pooja/module/cms/views/cms_view.dart';
 import 'package:divine_pooja/module/help_support/views/help_and_support_view.dart';
+import 'package:divine_pooja/module/home/controllers/home_controller.dart';
 import 'package:divine_pooja/module/home/widgets/delete_bottom_sheet.dart';
 import 'package:divine_pooja/module/home/widgets/logout_bottom_sheet.dart';
 import 'package:divine_pooja/module/home/widgets/otp_bottom_sheet.dart';
-import 'package:divine_pooja/module/my_address/views/my_address_view.dart';
 import 'package:divine_pooja/module/my_order/views/my_order_view.dart';
 import 'package:divine_pooja/module/wishlist/views/wishlist_view.dart';
 import 'package:image_picker/image_picker.dart';
 
 class DrawerView extends StatefulWidget {
-  const DrawerView({super.key});
+  final String mobile;
+
+  const DrawerView({super.key, required this.mobile});
 
   @override
   State<DrawerView> createState() => _DrawerViewState();
@@ -22,6 +25,7 @@ class DrawerView extends StatefulWidget {
 
 class _DrawerViewState extends State<DrawerView> {
   File image = File("");
+  HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -106,17 +110,7 @@ class _DrawerViewState extends State<DrawerView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Gaurav",
-                            style: TextStyle(
-                              color: textDarkCl,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 12.sp,
-                              fontFamily: semiBold,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          Text(
-                            "+91 8947841416",
+                            "+91${widget.mobile}",
                             style: TextStyle(
                               color: textDarkCl,
                               fontStyle: FontStyle.normal,
@@ -131,7 +125,7 @@ class _DrawerViewState extends State<DrawerView> {
                     GestureDetector(
                       onTap: () {
                         Get.back();
-                        OTPSheet().show(context);
+                        OTPSheet().show(context, "+91${widget.mobile}");
                       },
                       child: Image.asset(
                         editIc,
@@ -176,35 +170,47 @@ class _DrawerViewState extends State<DrawerView> {
             contColumn(
                 function: () {
                   Get.back();
-                  Get.to(() => const CMSView(tittle: "About Us"));
+                  Get.to(() => const CMSView(
+                        tittle: "About Us",
+                        type: 'about-us',
+                      ));
                 },
                 assetImg: infoIc,
                 tittle: 'About Us'),
             contColumn(
                 function: () {
                   Get.back();
-                  Get.to(() => const CMSView(tittle: "Cancellation Policy"));
+                  Get.to(() => const CMSView(
+                        tittle: "Cancellation Policy",
+                        type: 'cancellation-policy',
+                      ));
                 },
                 assetImg: cancelNewIc,
                 tittle: 'Cancellation Policy'),
             contColumn(
                 function: () {
                   Get.back();
-                  Get.to(() => const CMSView(tittle: "Refund Policy"));
+                  Get.to(() => const CMSView(
+                        tittle: "Refund Policy",
+                        type: 'refund-cancellation',
+                      ));
                 },
                 assetImg: refundIc,
                 tittle: 'Refund Policy'),
             contColumn(
                 function: () {
                   Get.back();
-                  Get.to(() => const CMSView(tittle: "Terms And Conditions"));
+                  Get.to(() => const CMSView(
+                        tittle: "Terms And Conditions",
+                        type: 'terms-condition',
+                      ));
                 },
                 assetImg: fileIc,
                 tittle: 'Terms And Conditions'),
             contColumn(
                 function: () {
                   Get.back();
-                  DeleteSheet().show(context);
+                  DeleteSheet().show(context,controller);
                 },
                 assetImg: deleteIc,
                 tittle: 'Delete Account'),
@@ -225,7 +231,7 @@ class _DrawerViewState extends State<DrawerView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        GestureDetector(
+        InkWell(
           onTap: function,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 16.h),

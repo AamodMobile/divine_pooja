@@ -39,7 +39,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SmallTexts(height: 4.0, color: Colors.black, size: 10, text: hiddenText ? ("$firstHalf...") : (firstHalf + secondHalf)),
+                SmallTexts(height: 4.0, color: Colors.black, size: 14, text: hiddenText ? ("$firstHalf...") : (firstHalf + secondHalf)),
                 const SizedBox(
                   height: 10,
                 ),
@@ -51,7 +51,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                   },
                   child: Text(
                     hiddenText ? "Read Item description" : "Read less description",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF2E65E7),
                       fontFamily: medium,
                       fontSize: 12,

@@ -1,0 +1,31 @@
+class ApiUrl {
+  static const String baseUrl = "https://atyourhome.co.in/divine/api/auth/";
+  static const String imageUrl = "https://atyourhome.co.in/divine/public/";
+  static const String login = "${baseUrl}login";
+  static const String otpVerify = "${baseUrl}verify-otp";
+  static const String homeApi = "${baseUrl}user/home";
+  static const String productList = "${baseUrl}user/product-list";
+  static const String productDetails = "${baseUrl}user/product-details";
+  static const String addCart = "${baseUrl}user/add-cart";
+  static const String cartList = "${baseUrl}user/cart-list";
+  static const String profileUpdate = "${baseUrl}user/profile";
+  static const String deleteCart = "${baseUrl}user/delete-cart";
+  static const String couponApply = "${baseUrl}user/coupon-apply";
+  static const String addAddress = "${baseUrl}user/add-address";
+  static const String deleteAddress = "${baseUrl}user/delete-address";
+  static const String addressList = "${baseUrl}user/address-list";
+  static const String selectAddress = "${baseUrl}user/select-address";
+  static const String addWishlist = "${baseUrl}user/add-wishlist";
+  static const String wishlistList = "${baseUrl}user/wishlist-list";
+  static const String couponList = "${baseUrl}user/coupon-list";
+  static const String saveOrder = "${baseUrl}user/save-order";
+  static const String orderList = "${baseUrl}user/order-list";
+  static const String orderDetail = "${baseUrl}user/order-detail";
+  static const String cms = "${baseUrl}user/cms";
+  static const String notification = "${baseUrl}user/notification";
+  static const String contactUs = "${baseUrl}contact-us";
+  static const String giveFeedback = "${baseUrl}user/feedback-rating";
+  static const String feedbackList = "${baseUrl}user/feedback-list";
+  static const String deleteAccount = "${baseUrl}user/delete-account";
+
+}

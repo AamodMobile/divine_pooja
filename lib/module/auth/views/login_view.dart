@@ -1,7 +1,7 @@
 import 'package:divine_pooja/constants/constants.dart';
 import 'package:divine_pooja/core/common_widgets/custom_buttons.dart';
 import 'package:divine_pooja/core/common_widgets/custom_input_fields.dart';
-import 'package:divine_pooja/module/auth/views/otp_view.dart';
+import 'package:divine_pooja/module/auth/controllers/auth_controller.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -11,88 +11,105 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  AuthController controller = Get.put(AuthController());
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  Image.asset(
-                    loginTopImg,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  Positioned(
-                      right: 0,
-                      left: 0,
-                      bottom: -2,
-                      child: Image.asset(
-                        divineLogo,
-                        width: 102.w,
-                        height: 94.h,
-                      ))
-                ],
-              ),
-              SizedBox(height: 16.h),
-              RichText(
-                text: TextSpan(
-                  text: "Login ",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: medium,
-                    fontWeight: FontWeight.w500,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 18.sp,
-                  ),
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                Stack(
                   children: [
-                    TextSpan(
-                      text: "or",
-                      style: TextStyle(
-                        color: greyTextCl,
-                        fontFamily: medium,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 16.sp,
-                      ),
+                    Image.asset(
+                      loginTopImg,
+                      width: MediaQuery.of(context).size.width,
                     ),
-                    TextSpan(
-                      text: " Signup ",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: medium,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 18.sp,
-                      ),
-                    ),
+                    Positioned(
+                        right: 0,
+                        left: 0,
+                        bottom: -2,
+                        child: Image.asset(
+                          divineLogo,
+                          width: 102.w,
+                          height: 94.h,
+                        ))
                   ],
                 ),
-              ),
-              SizedBox(height: 40.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40.w),
-                child: CustomTextField(
-                  borderCl: borderCl,
-                  borderRadius: 4.dm,
-                  hintText: "Enter Mobile Number",
-                  txKeyboardType: TextInputType.number,
-                  maxLength: 10,
+                SizedBox(height: 16.h),
+                RichText(
+                  text: TextSpan(
+                    text: "Login ",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: medium,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 18.sp,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "or",
+                        style: TextStyle(
+                          color: greyTextCl,
+                          fontFamily: medium,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 16.sp,
+                        ),
+                      ),
+                      TextSpan(
+                        text: " Signup ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: medium,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 18.sp,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: 60.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40.w),
-                child: CustomButtonWidget(
-                  onPressed: () {
-                    Get.to(()=>const OtpView());
-                  },
-                  text: 'Continue',
+                SizedBox(height: 40.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40.w),
+                  child: CustomTextField(
+                    borderCl: borderCl,
+                    borderRadius: 4.dm,
+                    hintText: "Enter Mobile Number",
+                    txKeyboardType: TextInputType.number,
+                    controller: controller.mobile,
+                    maxLength: 10,
+                    validator: (v) {
+                      if (v!.isEmpty) {
+                        return "Enter Mobile No";
+                      } else if (v.length < 10) {
+                        return "Enter Valid Mobile No.";
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(height: 60.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40.w),
+                  child: CustomButtonWidget(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        controller.login();
+                      }
+                    },
+                    text: 'Continue',
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         bottomSheet: Container(

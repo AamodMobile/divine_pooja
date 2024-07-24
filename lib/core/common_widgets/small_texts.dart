@@ -4,6 +4,7 @@
 
 
 import 'package:divine_pooja/constants/constants.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class SmallTexts extends StatelessWidget {
   final Color? color;
@@ -22,7 +23,8 @@ class SmallTexts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return
+     /* Text(
       text,
       maxLines: maxline,
       style: TextStyle(
@@ -31,6 +33,18 @@ class SmallTexts extends StatelessWidget {
           fontStyle: FontStyle.normal,
           fontFamily: regular,
           color: color),
+    );*/
+    Html(
+      data:text,
+      shrinkWrap: true,
+      style: {
+        "body": Style(
+          fontSize: FontSize(size),
+          fontWeight: FontWeight.w400,
+          fontFamily: regular,
+          color: color,
+        ),
+      },
     );
   }
 }
