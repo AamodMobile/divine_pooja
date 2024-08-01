@@ -1,5 +1,5 @@
 class NotificationListModel {
-  String? id;
+  dynamic id;
   String? userId;
   String? title;
   String? image;

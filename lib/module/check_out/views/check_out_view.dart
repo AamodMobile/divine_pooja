@@ -343,151 +343,154 @@ class _CheckOutViewState extends State<CheckOutView> {
                       const MySeparator(color: mainColor),
                       SizedBox(height: 16.h),
                       Visibility(
-                        visible: contextCtr.couponList.isEmpty ? false : true,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Available Offer",
-                              style: TextStyle(
-                                color: textDarkCl,
-                                fontFamily: medium,
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                var result = await Get.to(() => OfferView(
-                                      amount: contextCtr.firstTotalAmount.toString(),
-                                    ));
-                                if (result != null) {
-                                  contextCtr.cartListGet(false);
-                                }
-                              },
-                              child: Text(
-                                "View All",
-                                style: TextStyle(
-                                  color: textDarkCl,
-                                  fontFamily: medium,
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 12.sp,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 14.h),
-                      SizedBox(
-                        height: 100.h,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: contextCtr.couponList.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width * 0.85,
-                              margin: EdgeInsets.only(right: 8.w),
-                              padding: EdgeInsets.all(10.h),
-                              decoration: BoxDecoration(
-                                color: contextCtr.couponList[index].isApplied == true ? const Color(0xFFFFEDDD) : Colors.white,
-                                borderRadius: BorderRadius.circular(10.dm),
-                                border: Border.all(
-                                  color: const Color(0xFFD2B89F),
-                                  width: 1.w,
-                                ),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                          visible: contextCtr.couponList.isNotEmpty ? true : false,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        offerIc,
-                                        height: 24.h,
-                                        width: 24.w,
-                                      ),
-                                      SizedBox(width: 14.w),
-                                      Expanded(
-                                        child: Text(
-                                          contextCtr.couponList[index].couponName.toString(),
-                                          style: TextStyle(
-                                            color: textDarkCl,
-                                            fontFamily: medium,
-                                            fontWeight: FontWeight.w500,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: 14.sp,
-                                          ),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          if (contextCtr.couponList[index].isApplied == true) {
-                                            contextCtr.couponApply(contextCtr.couponList[index].couponCode.toString(), contextCtr.totalAmount.toString(), "1");
-                                          } else {
-                                            contextCtr.couponApply(contextCtr.couponList[index].couponCode.toString(), contextCtr.totalAmount.toString(), "0");
-                                          }
-                                        },
-                                        child: Image.asset(
-                                          contextCtr.couponList[index].isApplied == true ? circleSelectIc : circleDefultIc,
-                                          height: 18.h,
-                                          width: 18.w,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 12.h),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        contextCtr.couponList[index].couponCode.toString(),
-                                        style: TextStyle(
-                                          color: hintColor,
-                                          fontFamily: regular,
-                                          fontWeight: FontWeight.w400,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 12.sp,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Min spend ₹ ${contextCtr.couponList[index].cartValue.toString()}",
-                                        style: TextStyle(
-                                          color: hintColor,
-                                          fontFamily: regular,
-                                          fontWeight: FontWeight.w400,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 12.sp,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 4.h),
                                   Text(
-                                    "Valid til ${contextCtr.couponList[index].endDate.toString()}",
-                                    maxLines: 1,
+                                    "Available Offer",
                                     style: TextStyle(
-                                      color: hintColor,
-                                      fontFamily: regular,
-                                      fontWeight: FontWeight.w400,
+                                      color: textDarkCl,
+                                      fontFamily: medium,
+                                      fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
-                                      fontSize: 12.sp,
+                                      fontSize: 16.sp,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      var result = await Get.to(() => OfferView(
+                                        amount: contextCtr.firstTotalAmount.toString(),
+                                      ));
+                                      if (result != null) {
+                                        contextCtr.cartListGet(false);
+                                      }
+                                    },
+                                    child: Text(
+                                      "View All",
+                                      style: TextStyle(
+                                        color: textDarkCl,
+                                        fontFamily: medium,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 12.sp,
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                      SizedBox(height: 16.h),
-                      const Divider(
-                        color: Color(0xFFFFD3AA),
-                      ),
-                      SizedBox(height: 16.h),
+                              SizedBox(height: 14.h),
+                              SizedBox(
+                                height: 100.h,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: contextCtr.couponList.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return Container(
+                                      width: MediaQuery.of(context).size.width * 0.85,
+                                      margin: EdgeInsets.only(right: 8.w),
+                                      padding: EdgeInsets.all(10.h),
+                                      decoration: BoxDecoration(
+                                        color: contextCtr.couponList[index].isApplied == true ? const Color(0xFFFFEDDD) : Colors.white,
+                                        borderRadius: BorderRadius.circular(10.dm),
+                                        border: Border.all(
+                                          color: const Color(0xFFD2B89F),
+                                          width: 1.w,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Image.asset(
+                                                offerIc,
+                                                height: 24.h,
+                                                width: 24.w,
+                                              ),
+                                              SizedBox(width: 14.w),
+                                              Expanded(
+                                                child: Text(
+                                                  contextCtr.couponList[index].couponName.toString(),
+                                                  style: TextStyle(
+                                                    color: textDarkCl,
+                                                    fontFamily: medium,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontSize: 14.sp,
+                                                  ),
+                                                ),
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  if (contextCtr.couponList[index].isApplied == true) {
+                                                    contextCtr.couponApply(contextCtr.couponList[index].couponCode.toString(), contextCtr.totalAmount.toString(), "1");
+                                                  } else {
+                                                    contextCtr.couponApply(contextCtr.couponList[index].couponCode.toString(), contextCtr.totalAmount.toString(), "0");
+                                                  }
+                                                },
+                                                child: Image.asset(
+                                                  contextCtr.couponList[index].isApplied == true ? circleSelectIc : circleDefultIc,
+                                                  height: 18.h,
+                                                  width: 18.w,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 12.h),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                contextCtr.couponList[index].couponCode.toString(),
+                                                style: TextStyle(
+                                                  color: hintColor,
+                                                  fontFamily: regular,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 12.sp,
+                                                ),
+                                              ),
+                                              Text(
+                                                "Min spend ₹ ${contextCtr.couponList[index].cartValue.toString()}",
+                                                style: TextStyle(
+                                                  color: hintColor,
+                                                  fontFamily: regular,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontStyle: FontStyle.normal,
+                                                  fontSize: 12.sp,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 4.h),
+                                          Text(
+                                            "Valid til ${contextCtr.couponList[index].endDate.toString()}",
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              color: hintColor,
+                                              fontFamily: regular,
+                                              fontWeight: FontWeight.w400,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 12.sp,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 16.h),
+                              const Divider(
+                                color: Color(0xFFFFD3AA),
+                              ),
+                              SizedBox(height: 16.h),
+                            ],
+                          )),
                       Row(
                         children: [
                           Container(

@@ -347,7 +347,7 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
                                                       shape: BoxShape.circle,
                                                       border: Border.all(
                                                         color: greyTextCl,
-                                                        width: 10,
+                                                        width: 10.w,
                                                       ),
                                                     ),
                                                   ),
