@@ -1,0 +1,8 @@
+alias divine
+password divine_2024
+first and last name divine
+organizational unit divine
+organization divine
+City or Locality Jaipur
+State or Province Rajasthan
+country code 91
