@@ -82,7 +82,7 @@ class _MyAddressViewState extends State<MyAddressView> {
                     SizedBox(height: 15.h),
                     GestureDetector(
                       onTap: () async {
-                      var result=await  Get.to(() => AddAddressView(addressId: '', isEdit: false));
+                      var result=await  Get.to(() => const AddAddressView(addressId: '', isEdit: false));
                       if(result!=null){
                         contextCtr.addressListGet(false);
                       }
@@ -293,7 +293,7 @@ class _MyAddressViewState extends State<MyAddressView> {
                                   height: 40.h,
                                   child: CustomButtonWidget(
                                     onPressed: () {
-                                      Get.to(() => AddAddressView(
+                                      Get.to(() => const AddAddressView(
                                             addressId: '',
                                             isEdit: false,
                                           ));

@@ -10,30 +10,30 @@ String orderListModelToJson(OrderListModel data) => json.encode(data.toJson());
 
 class OrderListModel {
   int? id;
-  String? productId;
-  String? orderId;
-  String? transactionId;
-  String? unitPrice;
-  String? quantity;
-  String? amount;
-  String? isApplyCoupon;
+  dynamic productId;
+  dynamic orderId;
+  dynamic transactionId;
+  dynamic unitPrice;
+  dynamic quantity;
+  dynamic amount;
+  dynamic isApplyCoupon;
   dynamic couponCode;
-  String? couponAmount;
-  String? chargeableAmount;
-  String? gstPer;
-  String? gstAmt;
-  String? deliveryCharge;
-  String? taxableAmount;
-  String? totalAmount;
-  String? paymentMethod;
-  String? deliveryStatus;
+  dynamic couponAmount;
+  dynamic chargeableAmount;
+  dynamic gstPer;
+  dynamic gstAmt;
+  dynamic deliveryCharge;
+  dynamic taxableAmount;
+  dynamic totalAmount;
+  dynamic paymentMethod;
+  dynamic deliveryStatus;
   DateTime? createdAt;
-  String? customerNote;
+  dynamic customerNote;
   dynamic trackingId;
   dynamic shippingDate;
   dynamic shippingCompany;
-  String? productName;
-  String? productImage;
+  dynamic productName;
+  dynamic productImage;
 
   OrderListModel({
     this.id,

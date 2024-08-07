@@ -523,7 +523,7 @@ class _CheckOutViewState extends State<CheckOutView> {
                               child: CustomButtonWidget(
                                 onPressed: () async {
                                   if (contextCtr.addressList.isEmpty) {
-                                    var result = await Get.to(() => AddAddressView(
+                                    var result = await Get.to(() => const AddAddressView(
                                           addressId: '',
                                           isEdit: false,
                                         ));

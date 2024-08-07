@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:divine_pooja/constants/constants.dart';
 import 'package:divine_pooja/core/common_widgets/custom_buttons.dart';
 import 'package:divine_pooja/core/common_widgets/custom_input_fields.dart';

@@ -1,6 +1,6 @@
 class ApiUrl {
-  static const String baseUrl = "https://atyourhome.co.in/divine/api/auth/";
-  static const String imageUrl = "https://atyourhome.co.in/divine/public/";
+  static const String baseUrl = "https://divinee.in/api/auth/";
+  static const String imageUrl = "https://divinee.in/public/";
   static const String login = "${baseUrl}login";
   static const String otpVerify = "${baseUrl}verify-otp";
   static const String homeApi = "${baseUrl}user/home";
@@ -27,5 +27,8 @@ class ApiUrl {
   static const String giveFeedback = "${baseUrl}user/feedback-rating";
   static const String feedbackList = "${baseUrl}user/feedback-list";
   static const String deleteAccount = "${baseUrl}user/delete-account";
-
+  static const String checkNumber="${baseUrl}user/check-number";
+  static const String verifyNumber="${baseUrl}user/verify-number";
+  static const String newNumber="${baseUrl}user/new-number";
+  static const String verifyNewNumber="${baseUrl}user/verify-new-number";
 }

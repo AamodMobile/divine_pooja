@@ -40,7 +40,7 @@ class FeedBackListModel {
 
 class FeedbackImage {
   int? id;
-  String? feedbackId;
+  dynamic feedbackId;
   String? image;
   DateTime? createdAt;
   DateTime? updatedAt;

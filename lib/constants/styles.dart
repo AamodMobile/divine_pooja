@@ -1,4 +1,4 @@
-///App font
+//App font
 
 const regular = "Poppins-Regular";
 const medium = "Poppins-Medium";

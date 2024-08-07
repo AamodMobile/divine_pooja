@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final userModel = userModelFromJson(jsonString);
-
 import 'dart:convert';
 
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
@@ -66,11 +62,11 @@ class User {
   String? country;
   String? profileImage;
   String? billingCompany;
-  String? isNotification;
+  dynamic isNotification;
   dynamic notification;
-  int? onesignalId;
+  dynamic onesignalId;
   String? status;
-  String? isDeleted;
+  dynamic isDeleted;
   DateTime? createdAt;
   DateTime? updatedAt;
 

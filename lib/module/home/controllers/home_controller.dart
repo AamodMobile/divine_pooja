@@ -27,12 +27,14 @@ class HomeController extends GetxController implements GetxService {
     cartTotal.value = "";
     cartCount.value = "";
   }
+
   @override
   void onInit() {
     super.onInit();
     loadCountFromPrefs();
     homeApiCall(true);
   }
+
   void loadCountFromPrefs() async {
     final prefs = await SharedPreferences.getInstance();
     cartCount.value = prefs.getString('cart_count') ?? "0";
@@ -43,11 +45,13 @@ class HomeController extends GetxController implements GetxService {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('cart_count', cartCount.value);
   }
+
   void mobileReload(String value) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('mobile', cartCount.value);
     prefs.reload();
   }
+
   Future<void> homeApiCall(bool load) async {
     try {
       isLoading = load;
@@ -68,7 +72,7 @@ class HomeController extends GetxController implements GetxService {
         bannerList.value = List<BannerModel>.from(json["banner"].map((i) => BannerModel.fromJson(i))).toList(growable: true);
       } else {
         isLoading = false;
-       // errorToast(json["message"].toString());
+        // errorToast(json["message"].toString());
       }
     } catch (e) {
       isLoading = false;
@@ -97,6 +101,7 @@ class HomeController extends GetxController implements GetxService {
     }
     update();
   }
+
   Future<void> deleteAccount() async {
     try {
       showProgress();
@@ -104,10 +109,85 @@ class HomeController extends GetxController implements GetxService {
       var json = jsonDecode(result.body);
       if (json["status"] = true) {
         Get.back();
-        SharedPreferences preferences =
-        await SharedPreferences.getInstance();
+        SharedPreferences preferences = await SharedPreferences.getInstance();
         await preferences.clear();
         Get.offAll(() => const LoginView());
+        successToast(json["message"].toString());
+      } else {
+        closeProgress();
+        errorToast(json["message"].toString());
+      }
+    } catch (e) {
+      closeProgress();
+      Log.console(e.toString());
+    }
+    update();
+  }
+
+  Future<void> checkNumber(String mobile) async {
+    try {
+      showProgress();
+      var result = await ApiService.checkNumber(mobile);
+      var json = jsonDecode(result.body);
+      if (json["status"] = true) {
+        Get.back();
+        successToast(json["message"].toString());
+      } else {
+        closeProgress();
+        errorToast(json["message"].toString());
+      }
+    } catch (e) {
+      closeProgress();
+      Log.console(e.toString());
+    }
+    update();
+  }
+
+  Future<void> verifyNumber(String mobile, String otp) async {
+    try {
+      showProgress();
+      var result = await ApiService.verifyNumber(mobile, otp);
+      var json = jsonDecode(result.body);
+      if (json["status"] = true) {
+        Get.back();
+        successToast(json["message"].toString());
+      } else {
+        closeProgress();
+        errorToast(json["message"].toString());
+      }
+    } catch (e) {
+      closeProgress();
+      Log.console(e.toString());
+    }
+    update();
+  }
+
+  Future<void> newNumber(String mobile) async {
+    try {
+      showProgress();
+      var result = await ApiService.newNumber(mobile);
+      var json = jsonDecode(result.body);
+      if (json["status"] = true) {
+        Get.back();
+        successToast(json["message"].toString());
+      } else {
+        closeProgress();
+        errorToast(json["message"].toString());
+      }
+    } catch (e) {
+      closeProgress();
+      Log.console(e.toString());
+    }
+    update();
+  }
+
+  Future<void> verifyNewNumber(String mobile, String otp) async {
+    try {
+      showProgress();
+      var result = await ApiService.verifyNewNumber(mobile, otp);
+      var json = jsonDecode(result.body);
+      if (json["status"] = true) {
+        Get.back();
         successToast(json["message"].toString());
       } else {
         closeProgress();

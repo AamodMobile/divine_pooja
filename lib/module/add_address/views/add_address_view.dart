@@ -6,8 +6,8 @@ import 'package:divine_pooja/module/add_address/model/address_list_model.dart';
 class AddAddressView extends StatefulWidget {
   final String addressId;
   final bool isEdit;
-  AddressListModel? addressListModel;
-   AddAddressView({super.key, required this.addressId,this.addressListModel, required this.isEdit});
+  final AddressListModel? addressListModel;
+  const AddAddressView({super.key, required this.addressId, this.addressListModel, required this.isEdit});
 
   @override
   State<AddAddressView> createState() => _AddAddressViewState();
@@ -20,15 +20,15 @@ class _AddAddressViewState extends State<AddAddressView> {
   @override
   void initState() {
     controller.reset();
-    if(widget.isEdit){
-      controller.name.text=widget.addressListModel!.name.toString();
-      controller.houseNo.text=widget.addressListModel!.houseNumber.toString();
-      controller.apartmentName.text=widget.addressListModel!.apartmentName.toString();
-      controller.addressLine.text=widget.addressListModel!.address.toString();
-      controller.pincode.text=widget.addressListModel!.pincode.toString();
-      controller.city.text=widget.addressListModel!.city.toString();
+    if (widget.isEdit) {
+      controller.name.text = widget.addressListModel!.name.toString();
+      controller.houseNo.text = widget.addressListModel!.houseNumber.toString();
+      controller.apartmentName.text = widget.addressListModel!.apartmentName.toString();
+      controller.addressLine.text = widget.addressListModel!.address.toString();
+      controller.pincode.text = widget.addressListModel!.pincode.toString();
+      controller.city.text = widget.addressListModel!.city.toString();
       controller.nearby.text = widget.addressListModel!.nearByLandmark.toString();
-      controller.addressType=widget.addressListModel!.addressType.toString();
+      controller.addressType = widget.addressListModel!.addressType.toString();
     }
     super.initState();
   }

@@ -64,6 +64,8 @@ const heartFillIc = "assets/icons/heart_fill_ic.png";
 //images
 const splash = "assets/images/splash_img.png";
 const introOneImg = "assets/images/intro_one.png";
+const introTwoImg = "assets/images/intro_two.png";
+const introThreeImg = "assets/images/intro_three.png";
 const loginTopImg = "assets/images/login_top_img.png";
 const bannerImg = "assets/images/banner_img.png";
 const eventsImg = "assets/images/events_img.png";

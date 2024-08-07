@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -434,5 +436,59 @@ class ApiService extends GetConnect {
       );
     }
     return result;
+  }
+  ///checkNumber
+  static Future<http.Response> checkNumber(String mobile) async {
+    http.Response response;
+    var instance = await SharedPreferences.getInstance();
+    var token = instance.getString('currentToken');
+    var result = await ApiClient.postData(ApiUrl.checkNumber, headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "mobile": mobile
+    });
+    response = http.Response(jsonEncode(result), 200, headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'});
+    return response;
+  }
+  ///verifyNumber
+  static Future<http.Response> verifyNumber(String mobile,String otp) async {
+    http.Response response;
+    var instance = await SharedPreferences.getInstance();
+    var token = instance.getString('currentToken');
+    var result = await ApiClient.postData(ApiUrl.verifyNumber, headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "mobile": mobile,
+      "otp": otp
+    });
+    response = http.Response(jsonEncode(result), 200, headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'});
+    return response;
+  }
+  ///newNumber
+  static Future<http.Response> newNumber(String mobile) async {
+    http.Response response;
+    var instance = await SharedPreferences.getInstance();
+    var token = instance.getString('currentToken');
+    var result = await ApiClient.postData(ApiUrl.newNumber, headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "mobile": mobile
+    });
+    response = http.Response(jsonEncode(result), 200, headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'});
+    return response;
+  }
+  ///verifyNewNumber
+  static Future<http.Response> verifyNewNumber(String mobile,String otp) async {
+    http.Response response;
+    var instance = await SharedPreferences.getInstance();
+    var token = instance.getString('currentToken');
+    var result = await ApiClient.postData(ApiUrl.verifyNewNumber, headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "mobile": mobile,
+      "otp": otp
+    });
+    response = http.Response(jsonEncode(result), 200, headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'});
+    return response;
   }
 }

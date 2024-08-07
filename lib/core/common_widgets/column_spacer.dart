@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 
 class ColumnSpacer extends StatelessWidget {
-  /// This snippet shows O/P of [ColumnSpacer].
+/*  /// This snippet shows O/P of [ColumnSpacer].
   ///
   /// ```dart
   /// I/P : [19, 21]
@@ -14,7 +14,7 @@ class ColumnSpacer extends StatelessWidget {
   /// I/P : [19, 21, 23]
   /// O/P : [19, 7, 21, 7, 23]
   /// ```
-  /// {@end-tool}
+  /// {@end-tool}*/
   const ColumnSpacer({
     super.key,
     required this.children,

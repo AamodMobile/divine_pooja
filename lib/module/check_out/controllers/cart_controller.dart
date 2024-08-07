@@ -67,7 +67,7 @@ class CartController extends GetxController implements GetxService {
         } else {
           if (addressList.length != 1) {
             for (int i = 0; i < addressList.length; i++) {
-              if (addressList[i].isSelected == "1") {
+              if (addressList[i].isSelected.toString() == "1") {
                 selectedValue.value = addressList[i].id.toString();
                 addressSelected.value = "${addressList[i].houseNumber} ${addressList[i].apartmentName} ${addressList[i].nearByLandmark} ${addressList[i].city} ${addressList[i].pincode}";
               }

@@ -1,7 +1,7 @@
 class ShippingStatus {
   String? orderId;
   String? deliveryStatus;
-  String? isTrack;
+  dynamic isTrack;
   String? shippingTime;
 
   ShippingStatus({

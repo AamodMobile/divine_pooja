@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:divine_pooja/constants/constants.dart';
-import 'package:divine_pooja/module/add_address/model/address_list_model.dart';
-import 'package:divine_pooja/module/home/models/product_model.dart';
 import 'package:divine_pooja/module/my_order/models/order_list_model.dart';
 import 'package:divine_pooja/module/my_order/models/shapping_address_model.dart';
 import 'package:divine_pooja/module/my_order/models/shapping_status_model.dart';
@@ -15,8 +13,9 @@ class OrderListController extends GetxController implements GetxService {
   bool onData = false;
   var order = OrderListModel().obs;
   var addressShipping = ShippingAddress().obs;
-  var product =OrderListModel().obs;
+  var product = OrderListModel().obs;
   var shippingStatus = <ShippingStatus>[].obs;
+
   Future<void> orderListGet() async {
     try {
       isLoading = true;
@@ -48,7 +47,7 @@ class OrderListController extends GetxController implements GetxService {
         isLoading = false;
         order.value = OrderListModel.fromJson(json["order"]);
         addressShipping.value = ShippingAddress.fromJson(json["shipping_address"]);
-        product.value =  OrderListModel.fromJson(json["order"]);
+        product.value = OrderListModel.fromJson(json["order"]);
         shippingStatus.value = List<ShippingStatus>.from(json["shipping_status"].map((i) => ShippingStatus.fromJson(i))).toList(growable: true);
       } else {
         onData = true;

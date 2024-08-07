@@ -172,8 +172,8 @@ class _IntroViewState extends State<IntroView> {
                 ),
                 SizedBox(height: 70.h),
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Text(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: const Text(
                     "We have an exclusive pooja kits. ",
                     style: TextStyle(
                       color: Colors.black,
@@ -186,8 +186,8 @@ class _IntroViewState extends State<IntroView> {
                 ),
                 SizedBox(height: 9.h),
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Text(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: const Text(
                     "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
                     style: TextStyle(
                       color: Colors.black,

@@ -6,11 +6,11 @@ class AddressListModel {
   String? houseNumber;
   String? apartmentName;
   String? address;
-  String? pincode;
+  dynamic pincode;
   String? city;
   String? nearByLandmark;
   String? addressType;
-  String? isSelected;
+  dynamic isSelected;
 
   AddressListModel({
     this.id,

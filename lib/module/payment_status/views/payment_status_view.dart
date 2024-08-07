@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:divine_pooja/constants/constants.dart';
 import 'package:divine_pooja/module/check_out/models/success_payment_model.dart';

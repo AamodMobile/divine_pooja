@@ -1,6 +1,5 @@
 import 'package:divine_pooja/constants/constants.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExpandableText extends StatefulWidget {
   const ExpandableText(

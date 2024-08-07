@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:divine_pooja/module/auth/models/user_model.dart';
 import 'package:divine_pooja/module/home/views/home_view.dart';
 import 'package:divine_pooja/module/intro/views/intro_view.dart';
+import 'package:divine_pooja/service/api_logs.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +15,7 @@ class SplashController extends GetxController implements GetxService {
       (value) {
         if (crtData != null) {
           UserModel crtUser = UserModel.fromJson(jsonDecode(crtData));
+          Log.console(crtUser);
           Get.offAll(() => const HomeView(), transition: Transition.rightToLeftWithFade, duration: const Duration(milliseconds: 200));
         } else {
           Get.offAll(() => const IntroView(), transition: Transition.rightToLeftWithFade, duration: const Duration(milliseconds: 200));

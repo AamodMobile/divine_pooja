@@ -1,19 +1,13 @@
 import 'package:divine_pooja/constants/constants.dart';
 
-
 class LabeledCheckbox extends StatelessWidget {
-   LabeledCheckbox({
-    super.key,
-    required this.label,
-    required this.value,
-    required this.onChanged,
-     this.color
-  });
-
   final String label;
-   Color? color;
+  final Color? color;
   final bool value;
   final Function(bool) onChanged;
+  const LabeledCheckbox({super.key, required this.label, required this.value, required this.onChanged, this.color});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +19,11 @@ class LabeledCheckbox extends StatelessWidget {
         height: 24,
         width: 24,
         decoration: BoxDecoration(
-          color: color??Color(0xFFE6E1FF),
+          color: color ?? const Color(0xFFE6E1FF),
           borderRadius: BorderRadius.circular(5),
         ),
         child: value
-            ? Center(
+            ? const Center(
                 child: Icon(
                   Icons.done,
                   size: 18,

@@ -1,10 +1,10 @@
 class CheckOutProductModel {
-  String? productId;
-  String? quantity;
-  String? productName;
-  String? regularPrice;
-  String? price;
-  String? productImage;
+  dynamic productId;
+  dynamic quantity;
+  dynamic productName;
+  dynamic regularPrice;
+  dynamic price;
+  dynamic productImage;
 
   CheckOutProductModel({
     this.productId,

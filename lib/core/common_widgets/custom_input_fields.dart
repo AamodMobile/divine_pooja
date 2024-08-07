@@ -1,7 +1,8 @@
 
+// ignore_for_file: must_be_immutable
+
 import 'package:divine_pooja/constants/constants.dart';
 
-// ignore: must_be_immutable
 class CustomTextField extends StatefulWidget {
   String hintText;
   TextEditingController? controller;

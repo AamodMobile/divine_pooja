@@ -124,8 +124,8 @@ class _WishListViewState extends State<WishListView> with TickerProviderStateMix
                             child: GestureDetector(
                               onTap: () {
                                 Get.to(
-                                    () => const ItemDetailsView(
-                                          productId: '',
+                                    () =>  ItemDetailsView(
+                                          productId:  contextCtr.wishList[index].id.toString(),
                                         ),
                                     transition: Transition.fadeIn,
                                     duration: const Duration(seconds: 1));
